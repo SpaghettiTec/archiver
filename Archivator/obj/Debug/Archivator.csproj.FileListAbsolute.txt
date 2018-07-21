@@ -1,0 +1,20 @@
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\bin\Debug\Archivator.exe.config
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\bin\Debug\Archivator.exe
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\bin\Debug\Archivator.pdb
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\Archivator.csprojResolveAssemblyReference.cache
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\MainWindow.g.cs
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\App.g.cs
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\Archivator_MarkupCompile.cache
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\Archivator_MarkupCompile.lref
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\MainWindow.baml
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\Archivator.g.resources
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\Archivator.Properties.Resources.resources
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\Archivator.csproj.GenerateResource.Cache
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\Archivator.exe
+c:\users\mixap\documents\visual studio 2015\Projects\Archivator\Archivator\obj\Debug\Archivator.pdb
+C:\Users\mixap\Documents\Repository\UNIVEN-ARCHIVE\Archivator\Archivator\bin\Debug\Archivator.exe.config
+C:\Users\mixap\Documents\Repository\UNIVEN-ARCHIVE\Archivator\Archivator\obj\Debug\Archivator.exe
+C:\Users\mixap\Documents\Repository\UNIVEN-ARCHIVE\Archivator\Archivator\obj\Debug\Archivator.pdb
+C:\Users\mixap\Documents\ActualRepository\archiver\README\Archivator\bin\Debug\Archivator.exe.config
+C:\Users\mixap\Documents\ActualRepository\archiver\README\Archivator\obj\Debug\Archivator.exe
+C:\Users\mixap\Documents\ActualRepository\archiver\README\Archivator\obj\Debug\Archivator.pdb
