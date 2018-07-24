@@ -35,15 +35,34 @@ namespace Archivator
                 public TreeNode Left; // левое поддерево
                 public TreeNode Right; // правое поддерево
             }
-        //public TreeNode Node; // экземпляр         
+            //public TreeNode Node; // экземпляр         B
         }
-        public static string FindCodeInTree(char symbol)
+        public static string FindCodeFromTree(char symbol, Tree tree)
         {
-            return "oops"; //Да пошло оно
+            return Binary.ToBinConvert(symbol);           //просто для теста  
+        }
+        public static char FindSymbolFromTree(string code)
+        {
+            return Binary.FromBinConvert(code);
         }
         public static void IncreaseTheTree(string arg, Tree curTree)
         {
-            
+
+        }
+        public static string Decode(string binary, Tree curTree)
+        {
+            string boofString = binary[0] + ""; //ненуачто\
+            string ret = "";
+            //код в любом случае 2 символа минимум так что вроде так работает
+            for (int i = 1; i < binary.Length; i++)
+            {
+                boofString += binary[i];
+                //if похоже на код => FindSymbolFromTree
+                ret += Binary.FromBinConvert(binary);
+
+
+            }
+            return ret;
         }
 
     }
@@ -63,82 +82,106 @@ namespace Archivator
             //создать .kusokGovna
             //работа с reader
             //закрываем поток
-            
 
             bool debugIsOn = false;
-            string tempString=""; 
-            string tempCode="";
+            string booferString = "";
+            string binaryString = "";
             string newFileAdress = fileAdress.Remove(fileAdress.Length - 4); newFileAdress += ".kusokGovna"; //замена адреса
             SymbolTree.Tree tree = new SymbolTree.Tree();//ну наверное как то так 
             //тут кароч переменную типа дерева обьявим, я потом с деревьями здесь отдельно разберусь, после целого симака ебучих деревьевС++ 
             StreamReader readFile = new StreamReader(File.Open(fileAdress, FileMode.Open, FileAccess.Read));
-            while(readFile.ReadLine() != null)
+            while ((booferString = readFile.ReadLine()) != null)
             {
                 if (debugIsOn) //ну если сделаешь окошко для дебага
                 {
                     //Console.WriteLine(readFile.ReadLine()); 
-                }                
-                SymbolTree.IncreaseTheTree(readFile.ReadLine(), tree);
+                }
+                SymbolTree.IncreaseTheTree(booferString, tree);
 
             }
             readFile.Close();
-            tempString = "";
+            booferString = "";
 
-            StreamWriter writeFile = new StreamWriter(File.Open(fileAdress, FileMode.Create, FileAccess.Write));
+            StreamWriter writeFile = new StreamWriter(File.Open(newFileAdress, FileMode.Create, FileAccess.Write));
 
             readFile = new StreamReader(File.Open(fileAdress, FileMode.Open, FileAccess.Read));
 
-            while (readFile.ReadLine() != null) //нужно в ВПФ забахать дебаг окошко для вывода текста
+            while ((booferString = readFile.ReadLine()) != null)
+            //нужно в ВПФ забахать дебаг окошко для вывода текста
             {
                 if (debugIsOn) //ну если сделаешь окошоко для дебага
                 {
                     //Console.WriteLine(readFile.ReadLine()); 
                 }
-                tempString = readFile.ReadLine(); //строку передаем 
-                for (int i = 0; i < tempString.Length; i++)
+                Console.WriteLine(booferString);
+
+                for (int i = 0; i < booferString.Length; i++)
                 {
-                    tempCode = SymbolTree.FindCodeInTree(tempString[i]); //получаем сжатый код из дерева 
-                    if (tempCode.Length > 8) 
+                    binaryString += SymbolTree.FindCodeFromTree(booferString[i], tree); //получаем сжатый код из дерева 
+
+                    if (binaryString.Length > 8)
                     {
-                        writeFile.Write(Binary.FromBinConvert(tempCode.Substring(0, 7))); //жрять жри его
+                        writeFile.Write(Binary.FromBinConvert(binaryString.Substring(0, 8))); //жрять жри его
+                        //Console.WriteLine(Binary.FromBinConvert(tempCode.Substring(0, 7)));
                         //надеюсь никакую хуйню не забыл чот уже спать хочу
-                        tempCode.Substring(8); //экспроприация
+                        binaryString = binaryString.Substring(8); //экспроприация
                     }
-                    //сравнение 
+
                 }
             }
-            if(tempCode.Length >0)
+            if (binaryString.Length > 0)
             {
-                Binary.ModifyCode(tempCode);
-                writeFile.Write(Binary.FromBinConvert(tempCode));
+                Console.WriteLine("------");
+                Binary.ModifyCode(binaryString);
+                writeFile.Write(Binary.FromBinConvert(binaryString));
             }
             readFile.Close();
-            File.Delete(fileAdress);
+            //File.Delete(fileAdress); для тестов пока оставим
             //write smtg
             writeFile.Close();
         }
 
         public static void DecodeFile(string fileAdress)
         {
-            BinaryReader _curFileReader = new BinaryReader(File.Open(fileAdress, FileMode.Open, FileAccess.Read));
+            //
+            string newFileAdress = fileAdress.Remove(fileAdress.Length - ".kusokGovna".Length); newFileAdress += ".txt"; //замена адреса
+            BinaryReader binaryReader = new BinaryReader(File.Open(fileAdress, FileMode.Open, FileAccess.Read));
+            StreamWriter streamWriter = new StreamWriter(File.Open(newFileAdress, FileMode.Create, FileAccess.Write));
             //потом потещу как лучше сыграть с бинарными файлами
             //тут надо будет считать длину таблицы/дерева 
-            while(_curFileReader.PeekChar() > -1 ) //проверка конца файла
+
+            bool debugIsOn = false;
+            string booferString = "";
+            string binaryString = "";
+            SymbolTree.Tree tree = new SymbolTree.Tree();
+            //заполнить дерево
+            int counter = 0;
+            while (binaryReader.PeekChar() > -1)
             {
-                //по символу, наверное бесполезно
-                //что то делаем с _curFile.ReadChar()
+
+                binaryString += Binary.ToBinConvert(binaryReader.ReadChar());
+                //надо проверить, вдруг на нормальном ЯП можно переносить символ конца строки. Да и вообще символы табуляции и прочее.
+                booferString += SymbolTree.Decode(binaryString, tree);
+                if (counter > 255)
+                {
+                    counter = 0;
+                    streamWriter.WriteLine(booferString);
+                    booferString = "";
+                }
+                else
+                {
+                    counter++;
+                }
             }
-            _curFileReader.Close();
-            
+            binaryReader.Close();
+            streamWriter.Close();
+
             //сделать tryCatch     
 
             //выгрузить из файла дерево getTree
             //декодировать используя дерево
             //заменить тип файла
-
         }
-
-
     }
 
     internal static class Binary //бинарные операции
